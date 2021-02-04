@@ -1,0 +1,9 @@
+@import url("../node_modules/bootstrap/dist/css/bootstrap.min.css")  ; 
+@import 'https://use.fontawesome.com/releases/v5.8.1/css/all.css';  
+
+.table td{
+    padding: .75rem;
+    vertical-align: top;
+    cursor: pointer;
+    border-top: 1px solid #dee2e6;
+}

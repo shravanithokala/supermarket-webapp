@@ -1,0 +1,223 @@
+<div class="container">
+    <br/>
+    <div class="row justify-content-left">
+        <a routerLink = "/home">Home</a>
+    </div>
+	<!-- <div class="row justify-content-center">
+                        <div class="col-12 col-md-10 col-lg-8">
+                            <form class="card card-sm">
+                                <div class="card-body row no-gutters align-items-center">
+                                    <div class="col-auto">
+                                        <i class="fas fa-search h4 text-body"></i>
+                                    </div>
+                                    <div class="col">
+                                        <input class="form-control form-control-lg form-control-borderless" type="search" placeholder="Search Customers">
+                                    </div>
+                                    <div class="col-auto">
+                                        <button class="btn btn-lg btn-primary" type="submit">Search</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div> -->
+</div>
+<div class="container">
+    <div class="container-fluid p-0">
+        <h1 class="h3 mb-3"></h1>
+        <br>
+        <br>
+		<div class="row">
+			<div class="col-xl-8">
+				<div class="card">
+					<div class="card-header pb-0">
+						<div class="card-actions float-right">
+							<div class="dropdown show">
+                                    <button type="button"(click) = "onAddCustomer()" class = "btn btn-primary" style="margin-bottom: 15px;">
+                                        Add New
+                                    </button>
+
+							</div>
+						</div>
+                        <h5 class="card-title mb-0">Customers</h5>
+
+					</div>
+					<div class="card-body">
+						<table class="table table-striped" style="width:100%">
+							<thead>
+								<tr>
+									<th>Name</th>
+									<th>DOB</th>
+									<th>Phone</th>
+									<th>Address</th>
+									<th>Type</th>
+								</tr>
+							</thead>
+							<tbody *ngFor="let customer of customers">
+								<tr>
+									<td (click)="onSelectCustomer(customer)">{{customer.firstName}} {{customer.lastName}}</td>
+									<td (click)="onSelectCustomer(customer)">{{customer.dob}}</td>
+									<td (click)="onSelectCustomer(customer)">{{customer.phone}}</td>
+									<td (click)="onSelectCustomer(customer)">{{customer.address}}</td>
+                                     <td><span class="badge bg-success">{{customer.customerType}}</span></td>
+                                    <!-- <td *ngIf ="customerType === 1" (click)="onSelectCustomer(customer)"><span class="badge bg-success">{{customer.customerType}}</span></td>
+                                    <td *ngIf ="customerType === 2" (click)="onSelectCustomer(customer)"><span class="badge bg-success">{{customer.customerType}}</span></td>
+                                    <td *ngIf ="customerType === 3" (click)="onSelectCustomer(customer)"><span class="badge bg-success">{{customer.customerType}}</span></td> -->
+                                    
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+
+			<div class="col-xl-4" *ngIf = "customerSelected">
+				<div class="card">
+					<div class="card-header">
+                        <h5 class="card-title mb-0">{{selectedCustomer.lastName}}'s Profile
+                            <!-- <a class="btn btn-warning">Edit</a>&nbsp;
+                            <a class="btn btn-danger">Delete</a> -->
+                            <i class="fas fa-trash" (click) = deleteCustomer(selectedCustomer.customerId) style = "float: right; color: #cc3300; cursor: pointer;"></i>
+                            <i class="fas fa-edit" (click) = editCustomer(selectedCustomer) style = "float: right; color: #ffcc00; margin-right: 15px; cursor: pointer;"></i>
+                        </h5>
+                        <!-- <button class="btn btn-warning" type="submit" style="margin: 15px;">Edit</button>
+                        <button class="btn btn-danger" type="submit">Delete</button> -->
+
+					</div>
+					<div class="card-body">
+						<table class="table table-sm mt-2 mb-4">
+							<tbody>
+								<tr>
+									<th>First Name</th>
+									<td>{{selectedCustomer.firstName}}</td>
+                                </tr>
+                                <tr>
+									<th>Last Name</th>
+									<td>{{selectedCustomer.lastName}}</td>
+								</tr>
+								<tr>
+									<th>DOB</th>
+									<td>{{selectedCustomer.dob}}</td>
+								</tr>
+								<tr>
+									<th>Phone</th>
+									<td>{{selectedCustomer.phone}}</td>
+								</tr>
+								<tr>
+									<th>Address</th>
+									<td>{{selectedCustomer.address}}</td>
+								</tr>
+								<tr>
+									<th>Type</th>
+									<td><span class="badge bg-success">{{selectedCustomer.customerType}}</span></td>
+									<!-- <td *ngIf ="customerType === 1"><span class="badge bg-success">{{selectedCustomer.customerType}}</span></td>
+									<td *ngIf ="customerType === 2"><span class="badge bg-warning">{{selectedCustomer.customerType}}</span></td>
+									<td *ngIf ="customerType == 3"><span class="badge bg-danger">{{selectedCustomer.customerType}}</span></td> -->
+								</tr>
+							</tbody>
+						</table>
+
+                        <!-- <strong>Past Orders</strong>
+                        
+                        <div class="card" style="margin-bottom: 3px; margin-top: 3px;">
+                            <div class="card-body">
+                                <li class="timeline-item">
+                                    <strong>Signed out</strong>
+                                    <span class="float-right text-muted text-sm">30m ago</span>
+                                    <p>Nam pretium turpis et arcu. Duis arcu tortor, suscipit...</p>
+                                </li>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <div class="card-body">
+                                <li class="timeline-item">
+                                    <strong>Signed out</strong>
+                                    <span class="float-right text-muted text-sm">30m ago</span>
+                                    <p>Nam pretium turpis et arcu. Duis arcu tortor, suscipit...</p>
+                                </li>
+                            </div>
+                        </div> -->
+					</div>
+				</div>
+            </div>
+            <div class="col-xl-4" *ngIf = "addSelected">
+				<div class="card">
+					<div class="card-header">
+                        <h5 class="card-title mb-0">Add New Customer</h5>
+					</div>
+					<div class="card-body">
+                        <div class="card" style="margin-bottom: 3px; margin-top: 3px;">
+                            <div class="card-body">
+                                <form #newCustomerForm="ngForm" (ngSubmit)="onSubmitAddCustomer(newCustomerForm.value)">
+                                    <label for="firstName">First Name</label>
+                                    <input type="text" name="firstName" required ngModel class="form-control">
+                                    <label for="lastName">Last Name</label>
+                                    <input type="text" name="lastName" required ngModel class="form-control">
+                                    <label for="dob">DOB</label>
+                                    <input type="date" name="dob" required ngModel class="form-control"> 
+                                    <label for="phone">Phone</label>
+                                    <input type="text" name="phone" required ngModel class="form-control">
+                                    <label for="address">Address</label>
+                                    <input type="text" name="address" required ngModel class="form-control">
+                                    <label for="type">Customer Type</label>
+                                    <select name="customerType" required ngModel class="form-control">
+                                        <option value="REGULAR">REGULAR</option>
+                                        <option value="LOYALITY_MEMBER">LOYALITY_MEMBER</option>
+                                        <option value="BUSINESS">BUSINESS</option>
+                                    </select>
+                                    <!-- <button type="submit"(click) = "onSubmitAddCustomer()" class = "btn btn-primary" style="float: right; margin-top: 15px;">
+                                        Add New
+                                    </button> -->
+                                    <button [disabled]="newCustomerForm.invalid" type="submit" class = "btn btn-primary" style="float: right; margin-top: 15px;">
+                                    Add 
+                                    </button>
+                                </form>
+
+                            </div>
+                        </div>
+					</div>
+				</div>
+            </div>
+
+<!-- Edit Customer -->
+
+            <div class="col-xl-4" *ngIf = "editSelected">
+				<div class="card">
+					<div class="card-header">
+                        <h5 class="card-title mb-0">Edit {{selectedEditCustomer.firstName}} {{selectedEditCustomer.lastName}}
+                        <i class="fas fa-trash" (click) = deleteCustomer(selectedEditCustomer.customerId) style = "float: right; color: #cc3300; cursor: pointer;"></i></h5>
+					</div>
+					<div class="card-body">
+                        <div class="card" style="margin-bottom: 3px; margin-top: 3px;"> 
+                            <div class="card-body">
+                                <form #editCustomerForm="ngForm" (ngSubmit)="onSubmitEditCustomer()">
+                                    <label for="firstName">First Name</label>
+                                    <input type="text" name="firstName" required [(ngModel)]="selectedEditCustomer.firstName" class="form-control">
+                                    <label for="lastName">Last Name</label>
+                                    <input type="text" name="lastName" required [(ngModel)]="selectedEditCustomer.lastName" class="form-control">
+                                    <label for="dob">DOB</label>
+                                    <input type="date" name="dob" required [(ngModel)]="selectedEditCustomer.dob" class="form-control"> 
+                                    <label for="phone">Phone</label>
+                                    <input type="text" name="phone" required [(ngModel)]="selectedEditCustomer.phone" class="form-control">
+                                    <label for="address">Address</label>
+                                    <input type="text" name="address" required [(ngModel)]="selectedEditCustomer.address" class="form-control">
+                                    <label for="type">Customer Type</label>
+                                    <select name="customerType" required [(ngModel)]="selectedEditCustomer.customerType" class="form-control">
+                                        <option value="REGULAR">REGULAR</option>
+                                        <option value="LOYALITY_MEMBER">LOYALITY_MEMBER</option>
+                                        <option value="BUSINESS">BUSINESS</option>
+                                    </select>
+                                    <button [disabled]="editCustomerForm.invalid" type="submit" class = "btn btn-primary" style="float: right; margin-top: 15px;">
+                                    Update 
+                                    </button>
+                                </form>
+
+                            </div>
+                        </div>
+					</div>
+				</div>
+            </div>
+            
+        </div>
+	</div>
+</div>
+
